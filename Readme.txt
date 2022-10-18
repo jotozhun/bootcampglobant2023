@@ -1,1 +1,0 @@
-Si no haces la tarea hay tabla

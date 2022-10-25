@@ -24,11 +24,11 @@ public class Main {
 
             Admin loggedAdmin = myBank.authenticateAdmin(username, password);
             if (loggedAdmin.getUsername() != null) {
-                displayAdminView();
+                displayAdminView(myBank);
             } else {
                 Client loggedClient = myBank.authenticateClient(username, password);
                 if (loggedClient.getName() != null) {
-                    displayClientView();
+                    displayClientView(myBank);
                 } else {
                     System.out.println("Los datos de inicio de sesión no son válidos");
                 }
@@ -36,11 +36,79 @@ public class Main {
         } while (!isAuthValid);
     }
 
-    public static void displayAdminView(){
+    public static void displayAdminView(Bank bank){
+        Scanner scan = new Scanner(System.in);
+        boolean exit = false;
+        do{
+            System.out.println("Bienvenido al menú de administrador");
+            System.out.println("Ingrese 1 para imprimir los clientes");
+            System.out.println("Ingrese 2 para cerrar sesión");
+            String option = scan.nextLine();
+            scan = new Scanner(System.in);
+            switch (option){
+                case "1":
+                    printClientList(bank);
+                    break;
+                case "2":
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Por favor ingrese una opción válida");
+                    break;
+            }
+        } while(!exit);
+    }
+
+    public static void displayClientView(Bank bank){
+        Scanner scan = new Scanner(System.in);
+        boolean exit = false;
+        do{
+            System.out.println("Bienvenido al menú de Cliente");
+            System.out.println("Ingrese 1 para hacer depósito");
+            System.out.println("Ingrese 2 para hacer retiro");
+            System.out.println("Ingrese 3 para hacer transferencia");
+            System.out.println("Ingrese 4 para hacer cerrar sesión");
+            String option = scan.nextLine();
+            scan = new Scanner(System.in);
+            switch (option){
+                case "1":
+                    addMoney();
+                    break;
+                case "2":
+                    withdrawMoney();
+                    break;
+                case "3":
+                    transferMoney();
+                    break;
+                case "4":
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Por favor ingrese una opción válida");
+                    break;
+            }
+        } while(!exit);
+    }
+
+    public static void printClientList(Bank bank){
+        if(bank.getClientsAmount() == 0){
+            System.out.println("No hay clientes registrados en el sistema");
+        } else{
+            for (int i = 0; i < bank.getClientsAmount(); i++){
+                System.out.println(bank.getClientByIndex(i));
+            }
+        }
+    }
+
+    public static void addMoney(){
 
     }
 
-    public static void displayClientView(){
+    public static void withdrawMoney(){
+
+    }
+
+    public static void transferMoney(){
 
     }
 

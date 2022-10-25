@@ -28,4 +28,8 @@ public class Client {
         return isAuthenticated;
     }
 
+    @Override
+    public String toString() {
+        return "Cliente " + this.name + " Nombre de usuario : " + this.username + " " + this.account;
+    }
 }

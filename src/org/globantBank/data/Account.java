@@ -9,8 +9,14 @@ public class Account {
     private Date openingDate;
 
     public Account(){
-        this.number = (int)Math.random();
+        this.number = (int)(100000 * Math.random());
         this.balance = 0;
         this.openingDate = new Date();
     }
+
+    @Override
+    public String toString() {
+        return "Cuenta #" + this.number + " balance : " + this.balance + " Creada en : " + this.openingDate;
+    }
+
 }

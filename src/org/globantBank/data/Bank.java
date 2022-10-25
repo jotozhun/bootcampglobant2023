@@ -19,8 +19,20 @@ public class Bank {
         return name;
     }
 
+    public List<Client> getClientList() {
+        return clientList;
+    }
+
+    public Client getClientByIndex(int index) {
+        return clientList.get(index);
+    }
+
+    public int getClientsAmount(){
+        return clientList.size();
+    }
+
     public void registerClient(Client client){
-        this.clientList.add(client);
+            this.clientList.add(client);
     }
 
     public void registerAdmin(Admin admin){

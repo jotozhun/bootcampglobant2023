@@ -28,6 +28,14 @@ public class Client {
         return isAuthenticated;
     }
 
+    public boolean addMoneyIntoAccount (double moneyToAdd){
+        return this.account.addMoney(moneyToAdd);
+    }
+
+    public double getAccountBalance(){
+        return this.account.getBalance();
+    }
+
     @Override
     public String toString() {
         return "Cliente " + this.name + " Nombre de usuario : " + this.username + " " + this.account;

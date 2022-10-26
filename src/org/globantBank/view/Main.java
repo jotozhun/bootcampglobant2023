@@ -28,7 +28,7 @@ public class Main {
             } else {
                 Client loggedClient = myBank.authenticateClient(username, password);
                 if (loggedClient.getName() != null) {
-                    displayClientView(myBank);
+                    displayClientView(myBank, loggedClient);
                 } else {
                     System.out.println("Los datos de inicio de sesión no son válidos");
                 }
@@ -59,7 +59,7 @@ public class Main {
         } while(!exit);
     }
 
-    public static void displayClientView(Bank bank){
+    public static void displayClientView(Bank bank, Client client){
         Scanner scan = new Scanner(System.in);
         boolean exit = false;
         do{
@@ -72,7 +72,7 @@ public class Main {
             scan = new Scanner(System.in);
             switch (option){
                 case "1":
-                    addMoney();
+                    addMoney(client);
                     break;
                 case "2":
                     withdrawMoney();
@@ -100,8 +100,16 @@ public class Main {
         }
     }
 
-    public static void addMoney(){
-
+    public static void addMoney(Client client){
+        System.out.println("Ingrese la cantidad de dinero que desea depositar");
+        Scanner scan = new Scanner(System.in);
+        double moneyToAdd = scan.nextDouble();
+        boolean result = client.addMoneyIntoAccount(moneyToAdd);
+        if (result){
+            System.out.println("Se completó la transacción exitosamente, el nuevo saldo es de: " + client.getAccountBalance());
+        } else {
+            System.out.println("No se pudo completar la transacción, la cantidad a depositar no es válida");
+        }
     }
 
     public static void withdrawMoney(){

@@ -14,6 +14,19 @@ public class Account {
         this.openingDate = new Date();
     }
 
+    public double getBalance() {
+        return this.balance;
+    }
+
+    public boolean addMoney(double money){
+        boolean result = false;
+        if (money > 0){
+            this.balance = this.balance + money;
+            result = true;
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         return "Cuenta #" + this.number + " balance : " + this.balance + " Creada en : " + this.openingDate;

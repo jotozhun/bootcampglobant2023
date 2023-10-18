@@ -30,4 +30,4 @@ To create a new user, you need to provide a password. The password must meet the
 - The administrator menu has a password to access the administrative options. The default password is "admin".
 
 ## Author: Bryan Enrique Garay Benavidez
-### Date: 17/10/2023 19:00
+### Date: 17/10/2023 19:34

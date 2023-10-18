@@ -5,9 +5,9 @@ import java.util.Scanner;
 import java.util.HashSet;
 import java.util.Set;
 public class MyBank {
-    private ArrayList<BankClient> clients = new ArrayList<>();
-    private String adminPassword = "admin"; // Admin password
-    private Set<String> usernames = new HashSet<>();
+    private final ArrayList<BankClient> clients = new ArrayList<>();
+    private final String adminPassword = "admin"; // Admin password
+    private final Set<String> usernames = new HashSet<>();
 
     public void addClient(BankClient client) {
         clients.add(client);

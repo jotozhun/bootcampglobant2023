@@ -23,7 +23,7 @@ To create a new user, you need to provide a password. The password must meet the
 
 ## How to Run
 1. Compile the program using a Java compiler.
-2. Run the compiled program.
+2. Run the the file MyBank.java
 3. Follow the on-screen menu prompts to create users, bank accounts, and perform banking operations.
 
 ### Important Note

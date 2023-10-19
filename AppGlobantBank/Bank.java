@@ -24,13 +24,13 @@ public class Bank {
         final int tax = 200;
         final int plus = 15;
         for (User user : users) {
-            if (mount <= user.getBankAccount().getBalance() && client.equals(user.getUser())) {
+            if (mount <= user.getBankAccount().getBalance() && user.getUser().equals(client)) {
                 if (mount > 1000) {
                     user.getBankAccount()
-                            .setBalance(user.getBankAccount().getBalance() - ((mount * plus / 100) + (mount - tax)));
+                            .setBalance(user.getBankAccount().getBalance() - ((mount * plus / 100) + (mount + tax)));
                 }
                 user.getBankAccount()
-                        .setBalance(user.getBankAccount().getBalance() - (mount - tax));
+                        .setBalance(user.getBankAccount().getBalance() - (mount + tax));
             }
 
         }
@@ -40,7 +40,7 @@ public class Bank {
     public void add(double mount, String client) {
         for (User user : users) {
             if (user.getUser().equals(client)) {
-                user.getBankAccount().setBalance(mount);
+                user.getBankAccount().setBalance(user.getBankAccount().getBalance() + mount);
             }
 
         }

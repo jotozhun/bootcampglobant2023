@@ -51,7 +51,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "id: " + id + " Account Number: " + bankAccount.getAccountNumber() + ", user: " + user + ", Balance:"
+        return "id: " + id + " Account Number: " + bankAccount.getAccountNumber() + ", user: " + user + ", Balance: "
                 + bankAccount.getBalance()
                 + ", Date apen account: " + bankAccount.getOpenAccount_date();
     }

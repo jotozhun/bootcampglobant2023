@@ -1,5 +1,5 @@
 
-package org.globant.bank.bootcampglobant2023;
+package org.globant.bank.bootcampglobant2023.AppGlobantBank;
 
 import java.util.ArrayList;
 

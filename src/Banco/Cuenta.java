@@ -27,8 +27,17 @@ public class Cuenta {
         return dineroTotal;
     }
 
-    public void setDineroTotal(double dineroTotal) {
-        this.dineroTotal = dineroTotal;
+    public void setDineroTotal(double dineroTotal, String tipoTransaccion) {
+        if (tipoTransaccion.equals("deposito")){
+            this.dineroTotal = this.dineroTotal + dineroTotal;
+        }else{
+            if (dineroTotal> this.dineroTotal){
+                System.out.println("No hay fondos suficientes.");
+            }else{
+                this.dineroTotal = this.dineroTotal - dineroTotal;
+            }
+        }
+
     }
 
     public String getTipoCuenta() {

@@ -10,7 +10,7 @@ public class  Banco {
     private String passwordLogin;
     private Scanner scanner = new Scanner(System.in);
     private Scanner scanner2 = new Scanner(System.in);
-    private Scanner scanner3 = new Scanner(System.in);;
+    private Scanner scanner3 = new Scanner(System.in);
     private Scanner deposito = new Scanner(System.in);
 
     public Banco() {
@@ -44,7 +44,6 @@ public class  Banco {
         for (Usuario usuario: usuarios){
             System.out.println("Nombre: " + usuario.getNombre() + usuario.getApellido());
             System.out.println("Nombre de usuario: " + usuario.getUsername());
-            System.out.println("Pass de usuario: " + usuario.getPassword());
             System.out.println();
         }
     }
@@ -71,7 +70,34 @@ public class  Banco {
         return null;
     }
 
+    public Usuario consultCuenta(int numCuenta){
+        for (Usuario usuario: usuarios){
+            if(usuario.getCuenta().getNumero() == numCuenta){
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    public void imprimirCuentas(){
+        if (usuarios.size() == 0){
+            System.out.println("No hay usuarios registrados...");
+        }
+        for (Usuario usuario: usuarios){
+            System.out.println("Nombre: " + usuario.getNombre() + usuario.getApellido());
+            if (usuario.getCuenta() == null){
+                System.out.println("El usuario no tiene cuenta...");
+            }else{
+                System.out.println("Nombre de cuenta: " + usuario.getCuenta().getNumero());
+            }
+            System.out.println();
+        }
+    }
+
     public void ingresoDeCliente(){
+        int dineroDeposito;
+        int numCuentaTransferencia;
+
         System.out.println("Ingrese su username: ");
         usernameLogin = scanner2.nextLine();
         System.out.println("Ingrese su password: ");
@@ -84,16 +110,70 @@ public class  Banco {
             System.out.println("[2] Realizar retiro.");
             System.out.println("[3] Realizar transferencia.");
             System.out.println("[4] Consultar datos de la cuenta.");
+            System.out.println("[5] Abrir una cuenta.");
+            System.out.println("[0] Cerrar sesion.");
             int miniMenuOption = scanner3.nextInt();
 
             switch (miniMenuOption){
                 case 1:
+                    System.out.println("***** DEPOSITOS *****");
                     System.out.println("Ingrese la cantidad a depositar: ");
-                    int dineroDeposito = deposito.nextInt();
+                    dineroDeposito = deposito.nextInt();
+                    if(usuario.getCuenta() != null) {
+                        if (dineroDeposito > 0) {
+                            System.out.println("El deposito se realizo con exito");
+                            usuario.getCuenta().setDineroTotal(dineroDeposito, "deposito");
+                        } else {
+                            System.out.println("La cantidad ingresada es negativa...");
+                        }
+                    }else {
+                        System.out.println("El usuario no tiene una cuenta en el banco");
+                    }
+
                     break;
                 case 2:
+                    System.out.println("***** RETIROS *****");
+                    System.out.println("Ingrese la cantidad a retirar: ");
+                    dineroDeposito = deposito.nextInt();
+                    if(usuario.getCuenta() != null) {
+                        if (dineroDeposito > 0) {
+                            if (dineroDeposito > usuario.getCuenta().getDineroTotal()) {
+                                System.out.println("Fondos insuficientes");
+                            } else {
+                                System.out.println("El retiro se realizo con exito");
+                                usuario.getCuenta().setDineroTotal(dineroDeposito, "retiro");
+                            }
+                        } else {
+                            System.out.println("La cantidad ingresada es negativa...");
+                        }
+                    }else {
+                        System.out.println("El usuario no tiene una cuenta en el banco");
+                    }
+
                     break;
                 case 3:
+                    System.out.println("***** TRANSFERENCIAS *****");
+                    System.out.println("Ingrese el numero de cuenta: ");
+                    numCuentaTransferencia = deposito.nextInt();
+                    System.out.println("Ingrese la cantidad: ");
+                    dineroDeposito = deposito.nextInt();
+                    Usuario usuarioTransferencia = consultCuenta(numCuentaTransferencia);
+                if(usuarioTransferencia != null){
+                    if (usuario.getCuenta() != null) {
+                        if (dineroDeposito > usuario.getCuenta().getDineroTotal()) {
+                            System.out.println("Saldo insuficiente");
+                        } else {
+                            System.out.println("La transferencia se realizo con exito");
+                            usuarioTransferencia.getCuenta().setDineroTotal(dineroDeposito, "deposito");
+                            usuario.getCuenta().setDineroTotal(dineroDeposito, "retiro");
+                        }
+                    } else {
+                        System.out.println("El usuario no tiene una cuenta en el banco");
+                    }
+                }else{
+                    System.out.println("La cuenta no existe");
+                }
+
                     break;
                 case 4:
                     if(usuario.getCuenta() != null) {
@@ -103,6 +183,12 @@ public class  Banco {
                     }else{
                         System.out.println("El usuario no tiene una cuenta en el banco");
                     }
+                    break;
+                case 5:
+                    System.out.println("***** Abrir una cuenta *****");
+                    usuario.aggCuenta();
+
+                case 0:
                     break;
                 default:
                     break;

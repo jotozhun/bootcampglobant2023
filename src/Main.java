@@ -16,6 +16,7 @@ public class Main {
             System.out.println("[1] Mostrar clientes.");
             System.out.println("[2] Ingresar como cliente.");
             System.out.println("[3] Registrarse como cliente");
+            System.out.println("[4] Mostrar cuentas");
             System.out.println("[0] Salir.");
             option = scanner.nextInt();
             switch (option){
@@ -30,8 +31,13 @@ public class Main {
                     System.out.println();
                     break;
                 case 3:
-                    System.out.println("Registrarse como cliente\n");
+                    System.out.println("***** Registrarse como cliente *****\n");
                     bank.aggUsuario();
+                    System.out.println();
+                    break;
+                case 4:
+                    System.out.println("***** Lista de cuentas registrados: *****");
+                    bank.imprimirCuentas();
                     System.out.println();
                     break;
                 case 0:

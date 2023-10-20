@@ -24,21 +24,34 @@ public class Usuario {
     }
 
     public void aggCuenta(){
-        Random random = new Random();
-        int min = 1000000;  // El número más pequeño de 7 dígitos
-        int max = 9999999;  // El número más grande de 7 dígitos
-        int numeroAleatorio = random.nextInt(max - min + 1) + min;
-        System.out.println("Ingrese el tipo de cuenta que desea crear (Ahorro - Corriente)");
-        String tipoCuenta = scanner.nextLine();
+        if(cuenta == null){
+            String tipoCuenta;
+            Random random = new Random();
+            int min = 1000000;  // El número más pequeño de 7 dígitos
+            int max = 9999999;  // El número más grande de 7 dígitos
+            int numeroAleatorio = random.nextInt(max - min + 1) + min;
+            do {
+                System.out.println("Ingrese el tipo de cuenta que desea crear (Ahorro - Corriente)");
+                tipoCuenta = scanner.nextLine();
+                tipoCuenta = tipoCuenta.toLowerCase();
+                if (tipoCuenta.equals("ahorro") || tipoCuenta.equals("corriente")) {
+                    // Obtener la fecha actual
+                    Date fechaCreacion = new Date();
 
-        // Obtener la fecha actual
-        Date fechaCreacion = new Date();
+                    // Formatear la fecha como una cadena (puedes ajustar el formato según tus preferencias)
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    String fechaCreacionStr = dateFormat.format(fechaCreacion);
 
-        // Formatear la fecha como una cadena (puedes ajustar el formato según tus preferencias)
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String fechaCreacionStr = dateFormat.format(fechaCreacion);
+                    this.cuenta = new Cuenta(numeroAleatorio, 0, tipoCuenta, fechaCreacionStr);
+                    System.out.println("Su cuenta se creó con éxito.\nSu número de cuenta es: #" + cuenta.getNumero());
+                } else {
+                    System.out.println("No es una opction valida");
+                }
+            } while (!(tipoCuenta.equals("ahorro") || tipoCuenta.equals("corriente")));
+        }else{
+            System.out.println("El usuario ya tiene una cuenta en este banco...");
+        }
 
-        this.cuenta = new Cuenta(numeroAleatorio, 0, tipoCuenta, fechaCreacionStr);
     }
 
     public String getNombre() {

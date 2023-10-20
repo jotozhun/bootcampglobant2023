@@ -95,8 +95,9 @@ public class  Banco {
     }
 
     public void ingresoDeCliente(){
-        int dineroDeposito;
+        double dineroDeposito;
         int numCuentaTransferencia;
+        double impuesto;
 
         System.out.println("Ingrese su username: ");
         usernameLogin = scanner2.nextLine();
@@ -140,8 +141,15 @@ public class  Banco {
                             if (dineroDeposito > usuario.getCuenta().getDineroTotal()) {
                                 System.out.println("Fondos insuficientes");
                             } else {
-                                System.out.println("El retiro se realizo con exito");
-                                usuario.getCuenta().setDineroTotal(dineroDeposito, "retiro");
+                                if(dineroDeposito>1000){
+                                    impuesto = 200;
+                                    usuario.getCuenta().setDineroTotal(dineroDeposito + impuesto, "retiro");
+                                    System.out.println("El retiro se realizo con exito");
+                                }else{
+                                    impuesto = 200 + (dineroDeposito*0.15);
+                                    usuario.getCuenta().setDineroTotal(dineroDeposito+impuesto, "retiro");
+                                    System.out.println("El retiro se realizo con exito");
+                                }
                             }
                         } else {
                             System.out.println("La cantidad ingresada es negativa...");
@@ -163,9 +171,10 @@ public class  Banco {
                         if (dineroDeposito > usuario.getCuenta().getDineroTotal()) {
                             System.out.println("Saldo insuficiente");
                         } else {
-                            System.out.println("La transferencia se realizo con exito");
+                            impuesto = 100;
                             usuarioTransferencia.getCuenta().setDineroTotal(dineroDeposito, "deposito");
-                            usuario.getCuenta().setDineroTotal(dineroDeposito, "retiro");
+                            usuario.getCuenta().setDineroTotal(dineroDeposito+impuesto, "retiro");
+                            System.out.println("La transferencia se realizo con exito");
                         }
                     } else {
                         System.out.println("El usuario no tiene una cuenta en el banco");
